@@ -5,18 +5,17 @@
 const languageStrings = {
     'en': {
         'translation': {
-            'WELCOME' : "Welcome to Gloucester Guide!",
+            'WELCOME' : "Welcome to Los Angeles Guide!",
             'HELP'    : "Say about, to hear more about the city, or say coffee, breakfast, lunch, or dinner, to hear local restaurant suggestions, or say recommend an attraction, or say, go outside. ",
-            'ABOUT'   : "Gloucester Massachusetts is a city on the Atlantic Ocean.  A popular summer beach destination, Gloucester has a rich history of fishing and ship building.",
+            'ABOUT': "Los Angeles is the cultural, financial, and commercial center of Southern California. With a U.S. Census-estimated 2016 population of 3,976,322, it is the second most populous city in the United States (after New York City) and the most populous city in the state of California.",
             'STOP'    : "Okay, see you next time!"
         }
     }
     // , 'de-DE': { 'translation' : { 'TITLE'   : "Local Helfer etc." } }
 };
 const data = {
-    "city"        : "Gloucester",
-    "state"       : "MA",
-    "postcode"    : "01930",
+    "city"        : "Los Angeles",
+    "state"       : "CA",
     "restaurants" : [
         { "name":"Zeke's Place",
             "address":"66 East Main Street", "phone": "978-283-0474",
@@ -74,7 +73,7 @@ const data = {
     ]
 }
 
-const SKILL_NAME = "Gloucester Guide";
+const SKILL_NAME = "Super City Guide";
 
 // Weather courtesy of the Yahoo Weather API.
 // This free API recommends no more than 2000 calls per day
