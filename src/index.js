@@ -146,6 +146,33 @@ const handlers = {
         this.emit(':responseReady');
     },
 
+    'TeamNameIntent': function(){
+
+        var sportName = '';
+        if (this.event.request.intent.slots.sport.value) {
+            sportName = this.event.request.intent.slots.sport.value;
+        }
+        switch (sportName) {
+            case 'basketball':
+                say = 'The Los Angeles Lakers are the local basketball team.';
+                break;
+            case 'hockey':
+                say = 'The Los Angeles Kings are the local hockey team.';
+                break;
+            case 'baseball':
+                say = 'The Los Angeles Dodgers are the local baseball team.';
+                break;
+            case 'football':
+                say = 'The Los Angeles Rams are the local football team.';
+                break;
+            default:
+                say = 'Please try again. You can ask which team plays either basketball, hockey, baseball, or football. ';
+        }
+        this.emit(':tell', say);
+
+
+    },
+
     'AMAZON.YesIntent': function () {
         var restaurantName = this.attributes['restaurant'];
         var restaurantDetails = getRestaurantByName(restaurantName);
