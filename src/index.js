@@ -220,17 +220,52 @@ const handlers = {
             // sample API URL for Irvine, CA
             // https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22irvine%2C%20ca%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys
 
-            var say = 'It is ' + localTime
-                + ' and the weather in ' + data.city
-                + ' is '
-                + currentTemp + ' and ' + currentCondition;
-            this.response.speak(say);
-            this.emit(':responseReady');
+            // var say = 'It is ' + localTime
+            //     + ' and the weather in ' + data.city
+            //     + ' is '
+            //     + currentTemp + ' and ' + currentCondition;
+            // this.response.speak(say);
+            // this.emit(':responseReady');
 
             // TODO
             // Decide, based on current time and weather conditions,
             // whether to go out to a local beach or park;
             // or recommend a movie theatre; or recommend staying home
+
+            var AMPM = localTime.substr(-2);
+            console.log(AMPM);
+            var hour = parseInt(localTime.split(':').shift());
+            if (AMPM == "PM" && hour < 12) { hour = hour + 12; }
+            console.log(hour);
+
+            var suggestion = 'Read a book.';
+
+            console.log(suggestion);
+
+            if (hour < 7) { suggestion = 'Sleep.'; }
+            if (hour >= 7 && hour < 12) { suggestion = 'Ask me for a breakfast recommendation.'; }
+            if (hour >= 12 && hour < 14) { suggestion = 'Ask me for a lunch recommendation.'; }
+            if (hour >= 17 && hour < 20) { suggestion = 'Ask me for a dinner recommendation.'; }
+
+            if (hour >= 22) { suggestion = 'Go to bed.'; }
+
+            if (hour >= 20 && hour < 22) {
+                if (['Rain', 'Shower', 'Thunderstorms'].indexOf(currentCondition) > -1) {
+                    suggestion = 'Stay home and watch a movie on Amazon Prime since it is wet outside.';
+                } else {
+                    suggestion = 'Check out what is playing at the Cineplex movie theater on 123 Main St.';
+                }
+
+            }
+
+            if (['Sunny'].indexOf(currentCondition) > -1 - 1 && currentTemp > 75 && hour < 11) { suggestion = 'Plan a day at the beach, as it is sunny and warm today.' }
+
+            console.log(suggestion);
+            this.emit(':tell', 'It is ' + localTime
+                + ' and the weather in ' + data.city
+                + ' is '
+                + currentTemp + ' and ' + currentCondition
+                + '. I suggest you ' + suggestion);
 
 
         });
